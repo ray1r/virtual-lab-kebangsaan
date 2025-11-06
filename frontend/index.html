@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Virtual Lab — Kuis Nilai-Nilai Kebangsaan</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Splash (CSS-controlled) -->
+  <div id="splash" class="splash" aria-hidden="false">
+    <img src="assets/splash.svg" alt="Virtual Lab — Kuis Nilai-Nilai Kebangsaan" />
+  </div>
+
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <img src="assets/icon.svg" alt="" class="app-icon" />
+      <h1>Virtual Lab — Kuis Nilai-Nilai Kebangsaan</h1>
+    </div>
+    <nav aria-label="Main navigation">
+      <button id="btn-home" class="nav-btn">Home</button>
+      <button id="btn-quiz" class="nav-btn">Mulai Kuis</button>
+      <button id="btn-practice" class="nav-btn">Latihan Interaktif</button>
+      <button id="btn-about" class="nav-btn">Tentang</button>
+    </nav>
+  </header>
+
+  <main id="main" role="main">
+    <section id="home" class="page active" aria-labelledby="home-title">
+      <h2 id="home-title">Selamat datang</h2>
+      <p>Virtual Lab interaktif untuk belajar nilai-nilai kebangsaan. Pilih "Mulai Kuis" untuk menjawab soal, atau "Latihan Interaktif" untuk aktivitas drag-and-drop.</p>
+      <div class="cta">
+        <button id="start-quiz" class="primary">Mulai Kuis</button>
+      </div>
+    </section>
+
+    <section id="quiz" class="page" aria-labelledby="quiz-title" hidden>
+      <h2 id="quiz-title">Kuis — Nilai Kebangsaan</h2>
+      <div id="question-area" class="card">
+        <div id="progress" class="progress">Soal <span id="q-index">0</span>/<span id="q-total">0</span></div>
+        <article id="question" class="question" aria-live="polite"></article>
+        <div id="choices" class="choices"></div>
+        <div class="controls">
+          <button id="prev" class="secondary">Sebelumnya</button>
+          <button id="next" class="primary">Selanjutnya</button>
+          <button id="submit-quiz" class="cta hidden">Kirim Jawaban</button>
+        </div>
+      </div>
+      <div id="result" class="card hidden" aria-live="polite">
+        <h3>Hasil</h3>
+        <canvas id="score-chart" width="400" height="200" aria-hidden="false"></canvas>
+        <div id="score-summary"></div>
+        <button id="retake" class="primary">Ulangi</button>
+      </div>
+    </section>
+
+    <section id="practice" class="page" aria-labelledby="practice-title" hidden>
+      <h2 id="practice-title">Latihan Interaktif — Drag & Drop</h2>
+      <p>Seret nilai yang sesuai ke kategori yang tepat.</p>
+      <div class="drag-area">
+        <div id="draggables" class="draggables" role="list"></div>
+        <div class="dropzones">
+          <div class="dropzone" data-target="gotong-royong" aria-label="Gotong Royong">
+            <h4>Gotong Royong</h4>
+          </div>
+          <div class="dropzone" data-target="toleransi" aria-label="Toleransi">
+            <h4>Toleransi</h4>
+          </div>
+          <div class="dropzone" data-target="nasionalisme" aria-label="Nasionalisme">
+            <h4>Nasionalisme</h4>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="check-practice" class="primary">Periksa</button>
+        <div id="practice-feedback" role="status"></div>
+      </div>
+    </section>
+
+    <section id="about" class="page" aria-labelledby="about-title" hidden>
+      <h2 id="about-title">Tentang Aplikasi</h2>
+      <p>Virtual Lab ini dibuat sebagai tugas perkuliahan TPB ITB — fokus pada nilai-nilai kebangsaan dengan fitur HTML5, canvas, drag&drop, dan responsive layout.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>&copy; <span id="year"></span> Virtual Lab — Kuis Nilai-Nilai Kebangsaan</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

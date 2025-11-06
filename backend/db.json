@@ -1,0 +1,23 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Apa contoh nyata sikap gotong royong?",
+      "choices": ["Membantu membersihkan lingkungan bersama tetangga","Berkomentar negatif di media sosial","Membeli produk impor saja"],
+      "answer": 0
+    },
+    {
+      "id": "q2",
+      "question": "Tindakan apa yang menunjukkan toleransi?",
+      "choices": ["Menghormati perbedaan kepercayaan","Memaksakan pandangan sendiri","Mengucilkan kelompok lain"],
+      "answer": 0
+    },
+    {
+      "id": "q3",
+      "question": "Mengapa mengibarkan bendera penting saat hari nasional?",
+      "choices": ["Sebagai simbol nasionalisme dan identitas","Hanya untuk pesta","Tidak ada gunanya"],
+      "answer": 0
+    }
+  ],
+  "scores": []
+}
