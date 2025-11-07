@@ -2,30 +2,51 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// __dirname replacement untuk ESM
+// Path relatif ke file db.js sendiri
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// path ke JSON
+// File JSON di folder data
 const filePath = path.join(__dirname, 'data', 'questions.json');
+
+// Debug path
+console.log('DB Path:', filePath);
+
+// Data default jika JSON tidak ada / kosong
+const defaultQuestions = [
+  {
+    id: 1,
+    question: "Apa arti gotong royong dalam kehidupan sehari-hari?",
+    choices: [
+      "Bekerja sama untuk kepentingan bersama",
+      "Bersaing agar lebih unggul",
+      "Bekerja sendiri tanpa bantuan orang lain",
+      "Menunggu bantuan orang lain"
+    ],
+    answer: 0
+  }
+];
 
 export function readQuestions() {
   try {
+    if (!fs.existsSync(filePath)) {
+      console.log('questions.json tidak ditemukan, menggunakan default data');
+      return defaultQuestions;
+    }
     const data = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    return parsed.length ? parsed : defaultQuestions;
   } catch (err) {
-    console.error('Failed to read questions.json:', err.message);
-    return [];
+    console.error('Error reading questions.json:', err.message);
+    return defaultQuestions;
   }
 }
 
-// dummy write untuk serverless / local
+// writeQuestions tetap ada, tapi di Vercel tidak akan bekerja
 export function writeQuestions(questions) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(questions, null, 2));
-    console.log('Questions saved');
   } catch (err) {
-    console.error('Failed to write questions.json:', err.message);
+    console.error('Error writing questions.json:', err.message);
   }
 }
-
