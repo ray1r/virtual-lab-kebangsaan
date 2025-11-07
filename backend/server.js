@@ -1,70 +1,42 @@
-// server.js
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
+// backend/server.js
+import express from "express";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
 
 const app = express();
-const DB_PATH = path.join(__dirname, 'db.json');
+const PORT = 3000;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// helper read/write
-function readDB(){
-  const raw = fs.readFileSync(DB_PATH, 'utf8');
-  return JSON.parse(raw);
-}
-function writeDB(obj){
-  fs.writeFileSync(DB_PATH, JSON.stringify(obj, null, 2), 'utf8');
-}
+// Path ke file soal
+const __dirname = path.resolve();
+const QUESTIONS_PATH = path.join(__dirname, "backend", "data", "questions.json");
 
-// serve static frontend if exists (optional)
-const frontendPath = path.join(__dirname, '..', 'frontend');
-if(fs.existsSync(frontendPath)){
-  app.use(express.static(frontendPath));
-}
+// ============ ROUTES ============
 
-// API: get questions
-app.get('/api/questions', (req,res)=>{
-  try{
-    const db = readDB();
-    res.json({questions: db.questions});
-  }catch(e){
-    res.status(500).json({error:'Cannot read DB'});
+// Ambil semua soal
+app.get("/api/questions", (req, res) => {
+  try {
+    const data = fs.readFileSync(QUESTIONS_PATH, "utf-8");
+    const questions = JSON.parse(data);
+    res.json({ questions });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Gagal memuat soal." });
   }
 });
 
-// API: get question by id
-app.get('/api/questions/:id', (req,res)=>{
-  try{
-    const db = readDB();
-    const q = db.questions.find(x => x.id === req.params.id);
-    if(!q) return res.status(404).json({error:'Not found'});
-    res.json(q);
-  }catch(e){
-    res.status(500).json({error:'Cannot read DB'});
-  }
+// Simpan skor pengguna
+app.post("/api/score", (req, res) => {
+  const { score, correct, total, answers, timestamp } = req.body;
+  console.log("Skor diterima:", { score, correct, total, timestamp });
+  // Di sini bisa ditambah: simpan ke database/file jika diinginkan
+  res.json({ status: "ok", message: "Skor diterima" });
 });
 
-// API: receive score
-app.post('/api/score', (req,res)=>{
-  try{
-    const db = readDB();
-    const payload = req.body;
-    payload.id = 's_' + Date.now();
-    db.scores.push(payload);
-    writeDB(db);
-    res.json({status:'ok'});
-  }catch(e){
-    console.error(e);
-    res.status(500).json({error:'Cannot write DB'});
-  }
+// Jalankan server
+app.listen(PORT, () => {
+  console.log(`✅ Server API berjalan di http://localhost:${PORT}`);
 });
-
-// health
-app.get('/api/health', (req,res)=>res.json({status:'ok'}));
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, ()=> console.log(`API running on port ${PORT}`));
