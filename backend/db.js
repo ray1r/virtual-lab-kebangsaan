@@ -1,7 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const filePath = path.join(process.cwd(), 'backend', 'data', 'questions.json');
+// __dirname replacement untuk ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.join(__dirname, 'data', 'questions.json');
 
 // baca data
 export function readQuestions() {
