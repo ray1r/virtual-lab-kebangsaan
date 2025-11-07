@@ -71,6 +71,7 @@ main {
   flex: 1;
 }
 
+/* ====== PAGE ====== */
 .page {
   display: none;
 }
@@ -80,7 +81,7 @@ main {
   display: block;
 }
 
-/* ========== CARD ========== */
+/* ====== CARD ====== */
 .card {
   background: var(--card);
   border-radius: var(--radius);
@@ -89,6 +90,7 @@ main {
   margin-top: 1rem;
 }
 
+/* ====== QUESTION ====== */
 .question {
   font-size: 1.1rem;
   padding: 0.5rem 0;
@@ -115,6 +117,7 @@ main {
   border-color: var(--primary);
 }
 
+/* ====== CONTROLS ====== */
 .controls {
   display: flex;
   gap: 0.5rem;
@@ -143,7 +146,7 @@ main {
   display: none;
 }
 
-/* ========== DRAG & DROP ========== */
+/* ====== DRAG & DROP ====== */
 .drag-area {
   display: flex;
   gap: 1rem;
@@ -216,13 +219,13 @@ main {
   background: #e6f0ff;
 }
 
-/* 🔴 Jawaban salah */
+/* Jawaban salah */
 .draggable.wrong {
   border-color: #ef4444;
   background: #fee2e2;
 }
 
-/* ========== FOOTER ========== */
+/* ====== FOOTER ====== */
 .progress {
   font-size: 0.9rem;
   color: var(--muted);
@@ -236,7 +239,7 @@ footer {
   color: var(--muted);
 }
 
-/* ========== SPLASH ========== */
+/* ====== SPLASH ====== */
 .splash {
   position: fixed;
   inset: 0;
@@ -266,13 +269,52 @@ footer {
   animation: float 2.5s ease-in-out infinite;
 }
 
-/* animasi lembut */
+/* ====== ANIMASI ====== */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* ========== RESPONSIVE ========== */
+/* ====== QUIZ RESULT OVERLAY ====== */
+#quiz {
+  position: relative; /* referensi untuk #result */
+}
+
+#result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 1rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  border-radius: var(--radius);
+}
+
+#result h3,
+#result #score-summary,
+#result canvas,
+#result button {
+  margin: 0.5rem 0;
+}
+
+#result #retake {
+  margin-top: 1rem;
+  cursor: pointer;
+  z-index: 21;
+}
+
+#result.hidden {
+  display: none;
+}
+
+/* ====== RESPONSIVE ====== */
 @media (max-width: 700px) {
   .site-header {
     flex-direction: column;
@@ -286,5 +328,9 @@ footer {
 
   .dropzone {
     width: 90%;
+  }
+
+  #result {
+    padding: 0.5rem;
   }
 }
