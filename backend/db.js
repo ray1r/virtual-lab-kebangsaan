@@ -1,15 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const filePath = path.join(__dirname, 'data', 'questions.json');
+const filePath = path.join(process.cwd(), 'backend', 'data', 'questions.json');
 
-function readQuestions() {
+// baca data
+export function readQuestions() {
   const data = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(data);
 }
 
-function writeQuestions(questions) {
+// tulis data
+export function writeQuestions(questions) {
   fs.writeFileSync(filePath, JSON.stringify(questions, null, 2));
 }
-
-module.exports = { readQuestions, writeQuestions };
