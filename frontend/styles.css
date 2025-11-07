@@ -100,29 +100,28 @@ main{width:100%;max-width:var(--max-width);padding:1rem;flex:1}
   flex-wrap:wrap;
 }
 
-.dropzones {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* stabil */
-  gap: 1rem;
-  align-items: start; /* penting agar tidak naik-turun */
+.dropzone{
+  flex:1;
+  min-height:140px;
+  padding:1rem;
+  border-radius:12px;
+  border:2px dashed #cbd5e1;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  transition:border-color 0.2s, background 0.2s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
 }
 
-.dropzone {
-  min-height: 120px;
-  padding: .75rem;
-  border-radius: 12px;
-  border: 1px dashed #cbd5e1;
-  background: linear-gradient(180deg, #fff, #fbfdff);
-  transition: border-color 0.2s ease;
-  /* buat tetap di tempat */
-  flex-shrink: 0;
-  width: 100%;
-  box-sizing: border-box;
+.dropzone h4{
+  margin-top:0;
+  text-align:center;
 }
 
-.dropzone.over {
-  border-style: solid;
-  border-color: var(--primary);
+.dropzone.over{
+  border-color:var(--primary);
+  background:#e6f0ff;
 }
 
 /* 🔴 Jika jawaban salah */
