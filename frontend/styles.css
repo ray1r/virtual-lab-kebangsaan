@@ -143,7 +143,6 @@ footer{width:100%;max-width:var(--max-width);padding:1rem;text-align:center;colo
   position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #0b6cf7, #6fb3ff);
@@ -152,15 +151,24 @@ footer{width:100%;max-width:var(--max-width);padding:1rem;text-align:center;colo
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.splash img {
-  /* Ukuran dinamis mengikuti tinggi viewport */
-  width: min(40vmin, 400px); /* 40% dari sisi terkecil layar, maksimal 400px */
-  height: auto;
-  object-fit: contain;
-}
-
+/* efek fade saat splash hilang */
 .splash.hidden {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.98);
+}
+
+/* gambar di tengah layar */
+.splash img {
+  width: min(40vw, 300px); /* otomatis menyesuaikan layar */
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* animasi lembut agar tidak kaku */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
