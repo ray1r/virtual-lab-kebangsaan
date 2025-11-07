@@ -1,9 +1,8 @@
-  {
-    "name": "virtual-lab-kuis",
-    "version": "1.0.0",
-    "type": "module",
-    "scripts": {
-      "start": "vercel dev"
-    },
-    "dependencies": {}
-  }
+{
+  "name": "virtual-lab-kuis",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {}
+}
